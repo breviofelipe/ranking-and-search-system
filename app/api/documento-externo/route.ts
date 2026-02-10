@@ -22,11 +22,11 @@ export async function GET(request: NextRequest) {
     }
 
     const externalUrl = `${EXTERNAL_API_BASE_URL}/${encodeURIComponent(codigoDocumento)}`
-
+    const apiKey = process.env.API_KEY_DADOS_TRANSPARENCIA || ""
     const externalRes = await fetch(externalUrl, {
       headers: {
         Accept: "*/*",
-        'chave-api-dados': 'dd031ccb78dbbc5b4a4d1c042c1a5ce9'
+        'chave-api-dados': apiKey,
       },
       next: { revalidate: 3600 },
     })
